@@ -1,0 +1,104 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>au.com.addstar</groupId>
+    <artifactId>RemoteConsole</artifactId>
+    <version>1.0.4-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+
+  <artifactId>RemoteConsole-Velocity</artifactId>
+  <name>RemoteConsole-Velocity</name>
+
+  <repositories>
+    <!-- Addstar repo -->
+    <repository>
+      <id>addstar-repo</id>
+      <url>http://maven.addstar.com.au/artifactory/ext-release-local</url>
+      <snapshots>
+      	<enabled>false</enabled>
+      </snapshots>
+    </repository>
+	    
+    <!-- Other repositories -->
+    <repository>
+      <id>md_5</id>
+      <url>https://oss.sonatype.org/content/groups/public/</url>
+    </repository>
+    <repository>
+       <id>destroystokyo-snapshots</id>
+       <url>https://destroystokyo.com/repo/repository/maven-snapshots/</url>
+    </repository>
+  </repositories>
+
+  <dependencies>
+    <dependency>
+        <groupId>com.velocitypowered</groupId>
+        <artifactId>velocity-api</artifactId>
+        <version>${velocity.version}</version>
+        <scope>provided</scope>
+  	</dependency>
+  	<dependency>
+	  <groupId>net.cubespace</groupId>
+	  <artifactId>Yamler-Core</artifactId>
+	  <version>${yamler.version}</version>
+	</dependency>
+  	<dependency>
+  		<groupId>au.com.addstar</groupId>
+  		<artifactId>RemoteConsole-ServerCore</artifactId>
+  		<version>${project.version}</version>
+  		<scope>compile</scope>
+  	</dependency>
+  </dependencies>
+
+  <build>
+    <resources>
+      <resource>
+        <targetPath>.</targetPath>
+        <filtering>true</filtering>
+        <directory>${basedir}/src/main/resources</directory>
+        <includes>
+          <include>plugin.yml</include>
+        </includes>
+      </resource>
+    </resources>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>3.2.4</version>
+        <configuration>
+          <artifactSet>
+            <includes>
+              <include>net.cubespace:Yamler-Core</include>
+              <include>au.com.addstar:*</include>
+            </includes>
+          </artifactSet>
+          <filters>
+            <filter>
+              <artifact>*:*</artifact>
+              <excludes>
+                <exclude>META-INF/MANIFEST.MF</exclude>
+              </excludes>
+            </filter>
+          </filters>
+          <createDependencyReducedPom>false</createDependencyReducedPom>
+          <relocations>
+            <relocation>
+              <pattern>net.cubespace.Yamler</pattern>
+              <shadedPattern>au.com.addstar.rcon.Yamler</shadedPattern>
+            </relocation>
+          </relocations>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>

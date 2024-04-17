@@ -31,18 +31,30 @@
       <type>jar</type>
       <scope>compile</scope>
     </dependency>
-      <dependency>
-          <groupId>au.com.addstar</groupId>
-          <artifactId>RemoteConsole-Bungee</artifactId>
-          <version>${project.version}</version>
-          <scope>test</scope>
-      </dependency>
-      <dependency>
-          <groupId>io.github.waterfallmc</groupId>
-          <artifactId>waterfall-api</artifactId>
-          <version>${bungee.version}</version>
-          <scope>test</scope>
-      </dependency>
+    <dependency>
+      <groupId>au.com.addstar</groupId>
+      <artifactId>RemoteConsole-Bungee</artifactId>
+      <version>${project.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>au.com.addstar</groupId>
+      <artifactId>RemoteConsole-Velocity</artifactId>
+      <version>${project.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.github.waterfallmc</groupId>
+      <artifactId>waterfall-api</artifactId>
+      <version>${bungee.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.velocitypowered</groupId>
+      <artifactId>velocity-api</artifactId>
+      <version>${velocity.version}</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <build>
